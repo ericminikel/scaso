@@ -1,0 +1,36 @@
+List,Name,ID,FeatureType
+Active Feature List,Slc17a7,ENSMUSG00000070570,Gene Expression
+Active Feature List,Cux2,ENSMUSG00000042589,Gene Expression
+Active Feature List,Rasgrf2,ENSMUSG00000021708,Gene Expression
+Active Feature List,Rorb,ENSMUSG00000036192,Gene Expression
+Active Feature List,Kcnk2,ENSMUSG00000037624,Gene Expression
+Active Feature List,Sulf2,ENSMUSG00000006800,Gene Expression
+Active Feature List,Foxp2,ENSMUSG00000029563,Gene Expression
+Active Feature List,Vip,ENSMUSG00000019772,Gene Expression
+Active Feature List,Adarb2,ENSMUSG00000052551,Gene Expression
+Active Feature List,Gad2,ENSMUSG00000026787,Gene Expression
+Active Feature List,Col1a1,ENSMUSG00000001506,Gene Expression
+Active Feature List,Dcn,ENSMUSG00000019929,Gene Expression
+Active Feature List,Pdgfra,ENSMUSG00000029231,Gene Expression
+Active Feature List,Slc17a6,ENSMUSG00000030500,Gene Expression
+Active Feature List,Gad1,ENSMUSG00000070880,Gene Expression
+Active Feature List,Ccdc153,ENSMUSG00000070306,Gene Expression
+Active Feature List,mt-Nd2,ENSMUSG00000064345,Gene Expression
+Active Feature List,Mfge8,ENSMUSG00000030605,Gene Expression
+Active Feature List,C1qa,ENSMUSG00000036887,Gene Expression
+Active Feature List,Abcc9,ENSMUSG00000030249,Gene Expression
+Active Feature List,Mobp,ENSMUSG00000032517,Gene Expression
+Active Feature List,Parvb,ENSMUSG00000022438,Gene Expression
+Active Feature List,Reln,ENSMUSG00000042453,Gene Expression
+Active Feature List,Pvalb,ENSMUSG00000005716,Gene Expression
+Active Feature List,Sst,ENSMUSG00000004366,Gene Expression
+Active Feature List,Htr3a,ENSMUSG00000032269,Gene Expression
+Active Feature List,Cck,ENSMUSG00000032532,Gene Expression
+Active Feature List,Npy,ENSMUSG00000029819,Gene Expression
+Active Feature List,Calb2,ENSMUSG00000003657,Gene Expression
+Active Feature List,Lhx6,ENSMUSG00000026890,Gene Expression
+inhibitory_markers,Vip,ENSMUSG00000019772,Gene Expression
+inhibitory_markers,Pvalb,ENSMUSG00000005716,Gene Expression
+inhibitory_markers,Sst,ENSMUSG00000004366,Gene Expression
+inhibitory_markers,Npy,ENSMUSG00000029819,Gene Expression
+inhibitory_markers,Calb2,ENSMUSG00000003657,Gene Expression

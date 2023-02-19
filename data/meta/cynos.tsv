@@ -1,0 +1,9 @@
+animal	sex	disp	dose_mg	animal_id_short
+P0003	M	aCSF	0	m1
+P0004	M	aCSF	0	m2
+P0502	F	aCSF	0	f1
+P0504	F	aCSF	0	f2
+P0201	M	ASO N	20	m3
+P0202	M	ASO N	20	m4
+P0701	F	ASO N	20	f3
+P0702	F	ASO N	20	f4

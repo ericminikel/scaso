@@ -1,0 +1,5 @@
+reg	region
+ss	cortex
+fc	cortex
+cb	cerebellum
+th	thalamus

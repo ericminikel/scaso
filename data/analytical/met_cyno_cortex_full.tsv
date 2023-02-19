@@ -1,0 +1,10 @@
+assignments	celltype	color
+excitatory	neuron	#fcdc3b
+inhibitory	neuron	#ff9955
+astrocyte	glia	#7fcdbb
+oligodendrocyte	glia	#41b6c4
+OPC	glia	#1d91c0
+microglia	glia	#60affe
+endothelial stalk	other	#df65b0
+pericyte/fibroblast	other	#e7298a
+macrophage	other	#ce5ea8

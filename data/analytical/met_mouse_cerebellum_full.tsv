@@ -1,0 +1,15 @@
+assignments	celltype	color
+granule	neuron	#fed976
+Purkinje	neuron	#feb24c
+MLI	neuron	#fd8d3c
+Golgi	neuron	#fc4e2a
+PLI	neuron	#e31a1c
+UBC	neuron	#bd0026
+Bergmann glia	glia	#c7e9b4
+astrocyte	glia	#7fcdbb
+oligodendrocyte	glia	#41b6c4
+OPC	glia	#1d91c0
+microglia	glia	#60affe
+endothelial stalk	other	#df65b0
+fibroblast	other	#e7298a
+pericyte	other	#ce1256

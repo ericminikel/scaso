@@ -1,0 +1,48 @@
+Last updated: 2023-02-19
+
+QC metrics | mean number of reads: 532,089,568
+
+QC metrics | mean number of cells: 7,667
+
+QC metrics | mean reads per cell: 85,521
+
+QC metrics | mean of median UMI count per cell: 7,650
+
+QC metrics | mean of median genes per cell: 3,108
+
+Proportion of all UMIs that are Malat1 in all mouse samples: 11.4%
+
+Malat1 UMI/cell in PBS animals: mean 713.8 median: 360.0
+
+Prnp UMI/cell in PBS animals: mean 0.85 median: 0.00
+
+Total UMI/cell in PBS animals: mean 5428.06 median: 4009.00
+
+Prnp UMI/cell in ASO 6 animals: mean 0.55 median: 0.00
+
+Total UMI/cell in ASO 6 animals: mean 4949.53 median: 3736.00
+
+Malat1 vs. Prnp residual in 12 week cerebellum weighted Pearson's correlation: rho = 0.96 P = 3.9e-08
+
+Residual Prnp under hypothesis 1 and 2 respectively: 56.1% and 56.1%
+
+Rnaseh1 vs. residual weighted correlation: rho = -0.095 P = 0.605
+
+UMI/cell vs. residual weighted correlation: rho = -0.052 P = 0.779
+
+Basal Prnp vs. residual weighted correlation: rho = -0.322 P = 0.072
+
+Rnaseh1 vs. recovery weighted correlation: rho = 0.381 P = 0.118
+
+Basal Prnp vs. recovery weighted correlation: rho = 0.108 P = 0.671
+
+2-wk knockdown vs. recovery weighted correlation, ASO 1: rho = -0.857 P = 0.003
+
+2-wk knockdown vs. recovery weighted correlation, ASO 6: rho = -0.407 P = 0.277
+
+Cortex cyno vs. mouse weighted Pearson's correlation: rho = 0.396 P =  3.31e-01
+
+Cerebellum cyno vs. mouse weighted Pearson's correlation: rho = 0.797 P =  1.89e-03
+
+Mean weighted standard deviations by tissue: cerebellum: 12%, cortex: 7%, thalamus: 7%
+

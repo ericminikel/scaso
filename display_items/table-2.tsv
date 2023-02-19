@@ -1,0 +1,20 @@
+species	treatment	region	weeks	n
+mouse	ASO 6	cerebellum	3	4
+mouse	PBS	cerebellum	3	4
+mouse	ASO 6	cerebellum	12	4
+mouse	Malat1 ASO	cerebellum	12	4
+mouse	PBS	cerebellum	12	4
+mouse	ASO 1	cortex	2	4
+mouse	ASO 6	cortex	2	4
+mouse	PBS	cortex	2	4
+mouse	ASO 6	cortex	3	4
+mouse	PBS	cortex	3	7
+mouse	ASO 1	cortex	12	4
+mouse	ASO 6	cortex	12	4
+mouse	PBS	cortex	12	4
+mouse	ASO 6	thalamus	3	3
+mouse	PBS	thalamus	3	4
+cyno	aCSF	cerebellum	13	4
+cyno	ASO N	cerebellum	13	4
+cyno	aCSF	cortex	13	4
+cyno	ASO N	cortex	13	4

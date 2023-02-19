@@ -1,0 +1,13 @@
+sample	standard_curve	ngml_av	se_mean	flag
+Mo Neg QC	MoPrP16	10.24	0	LLQ
+Mo Pos Hi QC	MoPrP16	139.644	6.922	
+Mo Pos Lo QC	MoPrP16	10.24	0	LLQ
+Mo Pos Mid QC	MoPrP16	91.531	6.096	
+P0003 csf	CyPrP51	3	0.153	
+P0004 csf	CyPrP51	5.116	0.202	
+P0201 csf	CyPrP51	3.498	0.066	
+P0202 csf	CyPrP51	0.853	0.022	
+P0502 csf	CyPrP51	3.973	0.119	
+P0504 csf	CyPrP51	3.494	0.111	
+P0701 csf	CyPrP51	1.658	0.022	
+P0702 csf	CyPrP51	3.309	0.008	
