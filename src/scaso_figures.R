@@ -2420,8 +2420,8 @@ scp_metadata %>%
   mutate(across(NAME:umap_2, ~ gsub('character','group',gsub('integer','numeric',.)))) %>%
   mutate(NAME='TYPE') -> double_header
   
-write_tsv(double_header, 'display_items/scp_metadata.tsv')
-write_tsv(scp_metadata, 'display_items/scp_metadata.tsv', col_names=F, append = T)
+write_tsv(double_header, 'display_items/scp_metadata.tsv.gz')
+write_tsv(scp_metadata, 'display_items/scp_metadata.tsv.gz', col_names=F, append = T)
 
 for (this_aggr in unique(scp_metadata$aggr)) {
   
