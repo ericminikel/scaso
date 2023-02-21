@@ -5,26 +5,26 @@ Bergmann glia	CL_0000644	Bergmann glial cell
 MLI	CL_0000099	interneuron
 oligodendrocyte	CL_0000128	oligodendrocyte
 Golgi	CL_0000119	cerebellar Golgi cell
-exclude_doubletsberggran		
-exclude_nodiffexp		
 UBC	CL_4023161	unipolar brush cell
 OPC	CL_0002453	oligodendrocyte precursor cell
 pericyte/fibroblast	CL_0002320	connective tissue cell
 microglia	CL_0000129	microglial cell
 endothelial stalk	CL_0002671	endothelial stalk cell
 Purkinje	CL_0000121	Purkinje cell
-exclude_mligliadoublets		
 excitatory	CL_0000540	neuron
 inhibitory	CL_0000540	neuron
-exclude_gliadoublet		
 macrophage	CL_0000878	central nervous system macrophage
-exclude_debris		
-exclude_microgliadoublets		
 fibroblast	CL_0000057	fibroblast
 pericyte	CL_2000043	brain pericyte
 PLI	CL_0000099	interneuron
-exclude_emptydroplets		
-exclude_mitochondria		
-exclude_debrisanddoublets		
-exclude_doublets		
 ependymal	CL_0000065	ependymal cell
+exclude_debris	CL_0000000	cell
+exclude_mligliadoublets	CL_0000000	cell
+exclude_gliadoublet	CL_0000000	cell
+exclude_microgliadoublets	CL_0000000	cell
+exclude_emptydroplets	CL_0000000	cell
+exclude_mitochondria	CL_0000000	cell
+exclude_debrisanddoublets	CL_0000000	cell
+exclude_doublets	CL_0000000	cell
+exclude_doubletsberggran	CL_0000000	cell
+exclude_nodiffexp	CL_0000000	cell

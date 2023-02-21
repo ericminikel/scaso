@@ -2382,7 +2382,9 @@ all_ana %>%
   inner_join(organ_onto, by=c('region_long')) %>%
   rename(organ=uberon_id, organ__ontology_label=uberon_label) %>% 
   mutate(library_preparation_protocol='EFO_0009922', library_preparation_protocol__ontology_label="10x 3' v3") %>% 
-  mutate(sex=case_when(sex=='m' ~ 'male', sex=='f' ~ 'female')) %>% 
+  mutate(sex=case_when(sex=='m' ~ 'male', 
+                       sex=='f' ~ 'female',
+                       sex==F ~ 'female')) %>% 
   inner_join(tx_meta, by='tx') %>%
   rename(treatment=disp) %>%
   rename(weeks_post_dose=weeks) %>%
