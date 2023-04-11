@@ -1,0 +1,41 @@
+animal	region	ason_ug_g	dilution_factor	lloq_ug_g
+P0201	Cerebellum	14.8	50	1
+P0201	Cervical Spinal Cord	9.3	25	0.5
+P0201	Frontal Cortex	13.2	50	1
+P0201	Hippocampus	28.8	50	1
+P0201	Kidney Cortex	302	200	4
+P0201	Liver	43.7	200	4
+P0201	Lumbar Spinal Cord	28.4	100	2
+P0201	Pons	10.1	25	0.5
+P0201	Temporal Cortex	16.6	50	1
+P0201	Thoracic Spinal Cord	9.91	50	1
+P0202	Cerebellum	16.7	50,50	1.00, 1.00
+P0202	Cervical Spinal Cord	10.6	10	0.2
+P0202	Frontal Cortex	27.4	50	1
+P0202	Hippocampus	14.5	50	1
+P0202	Kidney Cortex	182	200	4
+P0202	Liver	37.8	200	4
+P0202	Lumbar Spinal Cord	23.5	100	2
+P0202	Pons	9.05	25	0.5
+P0202	Temporal Cortex	10.9	50	1
+P0202	Thoracic Spinal Cord	19	50	1
+P0701	Cerebellum	NR	50,20	1.00, 0.400
+P0701	Cervical Spinal Cord	5.32	50	1
+P0701	Frontal Cortex	26.1	50	1
+P0701	Hippocampus	10.7	50	1
+P0701	Kidney Cortex	229	200	4
+P0701	Liver	83.3	200	4
+P0701	Lumbar Spinal Cord	26.3	100	2
+P0701	Pons	6.12	25	0.5
+P0701	Temporal Cortex	17.5	50	1
+P0701	Thoracic Spinal Cord	11.5	50	1
+P0702	Cerebellum	17.8	50	1
+P0702	Cervical Spinal Cord	10.3	50	1
+P0702	Frontal Cortex	18.7	50	1
+P0702	Hippocampus	14.9	50	1
+P0702	Kidney Cortex	236	200	4
+P0702	Liver	63.7	200	4
+P0702	Lumbar Spinal Cord	37.9	100	2
+P0702	Pons	11.2	25	0.5
+P0702	Temporal Cortex	19.1	50	1
+P0702	Thoracic Spinal Cord	10.6	50	1

@@ -123,6 +123,111 @@ write(paste("QC metrics | mean reads per cell: ",formatC(mean(metrics$mean_reads
 write(paste("QC metrics | mean of median UMI count per cell: ",formatC(mean(metrics$median_umi_counts_per_cell),format='d',big.mark=','),'\n',sep=''),text_stats_path,append=T)
 write(paste("QC metrics | mean of median genes per cell: ",formatC(mean(metrics$median_genes_per_cell),format='d',big.mark=','),'\n',sep=''),text_stats_path,append=T)
 
+
+meta %>%
+  inner_join(tx_meta, by='tx') %>%
+  inner_join(region_meta, by='reg') %>%
+  rename(treatment=disp) %>%
+  group_by(species, region, treatment, weeks) %>%
+  summarize(.groups='keep', n=n()) %>%
+  ungroup() %>%
+  arrange(desc(species), region, weeks, treatment) -> samples_analyzed
+
+write_supp_table(samples_analyzed, 'Summary of samples analyzed.')
+
+read_csv('data/analytical/cla_mouse_cerebellum_full.csv', col_types=cols()) %>% 
+  clean_names() %>%
+  group_by(assignments) %>%
+  summarize(.groups='keep', n=n()) %>%
+  ungroup() -> this_study_mocb_cellcounts
+
+kozareva_mocb_cellcounts = read_tsv('data/other/kozareva_cerebellum_counts.tsv', col_types=cols())
+
+met = read_tsv('data/analytical/met_mouse_cerebellum_full.tsv', col_types=cols())
+
+this_study_mocb_cellcounts %>%
+  inner_join(kozareva_mocb_cellcounts, by='assignments') %>%
+  inner_join(met, by='assignments') %>%
+  select(-celltype) %>%
+  rename(subtype = assignments, n_this_study = n, n_kozareva2021 = count) -> mocb_count_compare
+
+write_supp_table(mocb_count_compare, 'Comparison of nuclei counts by cell type in mouse cerebellum, this study vs. Kozareva 2021.')
+
+mocb_count_cor = cor.test(mocb_count_compare$n_kozareva2021, mocb_count_compare$n_this_study, method='pearson')
+mocb_count_cor_rho = mocb_count_cor$estimate
+mocb_count_cor_p = mocb_count_cor$p.value
+
+write(paste('Correlation between cell counts by type in mouse cerebellum, this study vs. Kozareva 2021: rho = ',formatC(mocb_count_cor_rho, format='fg', digits=4),
+            ' P = ',formatC(mocb_count_cor_p, format='e', digits=2),'\n',sep=''),text_stats_path,append=T)
+
+
+# Thalamus - compare to Li 2020, with caveat that they were only looking at thalamic reticular nucleus which is enriched for inhibitory
+
+read_csv('data/analytical/cla_mouse_thalamus_full.csv', col_types=cols()) %>% 
+  clean_names() %>%
+  group_by(assignments) %>%
+  summarize(.groups='keep', n=n()) %>%
+  ungroup() -> this_study_moth_cellcounts
+
+li_moth_cellcounts = read_tsv('data/other/li_thalamus_counts.tsv', col_types=cols())
+
+met = read_tsv('data/analytical/met_mouse_thalamus_full.tsv', col_types=cols())
+
+this_study_moth_cellcounts %>%
+  inner_join(li_moth_cellcounts, by='assignments') %>%
+  inner_join(met, by='assignments') %>%
+  select(-celltype) %>%
+  rename(subtype = assignments, n_this_study = n, n_li2020 = count) -> moth_count_compare
+
+write_supp_table(moth_count_compare, 'Comparison of nuclei counts by cell type in mouse thalamus, this study vs. Li 2021.')
+
+moth_count_cor = cor.test(moth_count_compare$n_li2020, moth_count_compare$n_this_study, method='pearson')
+moth_count_cor_rho = moth_count_cor$estimate
+moth_count_cor_p = moth_count_cor$p.value
+
+write(paste('Correlation between cell counts by type in mouse thalamus, this study vs. Li 2020: rho = ',formatC(moth_count_cor_rho, format='fg', digits=4),
+            ' P = ',formatC(moth_count_cor_p, format='e', digits=2),'\n',sep=''),text_stats_path,append=T)
+
+moth_count_cor_noinhib = cor.test(moth_count_compare$n_li2020[moth_count_compare$subtype != 'inhibitory'], moth_count_compare$n_this_study[moth_count_compare$subtype != 'inhibitory'], method='pearson')
+moth_count_cor_noinhib_rho = moth_count_cor_noinhib$estimate
+moth_count_cor_noinhib_p = moth_count_cor_noinhib$p.value
+
+write(paste('Correlation between cell counts by type in mouse thalamus, this study vs. Li 2020, excluding inhibitory: rho = ',formatC(moth_count_cor_noinhib_rho, format='fg', digits=4),
+            ' P = ',formatC(moth_count_cor_noinhib_p, format='e', digits=2),'\n',sep=''),text_stats_path,append=T)
+
+# Cortex - compare to Ding 2020 https://singlecell.broadinstitute.org/single_cell/study/SCP425/single-cell-comparison-cortex-data#study-visualize
+
+read_csv('data/analytical/cla_mouse_cortex_full.csv', col_types=cols()) %>% 
+  clean_names() %>%
+  group_by(assignments) %>%
+  summarize(.groups='keep', n=n()) %>%
+  ungroup() -> this_study_mocx_cellcounts
+
+ding_mocx_cellcounts = read_tsv('data/other/ding_cortex_counts.tsv', col_types=cols())
+
+met = read_tsv('data/analytical/met_mouse_cortex_full.tsv', col_types=cols())
+
+this_study_mocx_cellcounts %>%
+  filter(!grepl('^excl',assignments)) %>%
+  inner_join(ding_mocx_cellcounts, by='assignments') %>%
+  inner_join(met, by='assignments') %>%
+  select(-celltype) %>%
+  rename(subtype = assignments, n_this_study = n, n_ding2020 = count) -> mocx_count_compare
+
+write_supp_table(mocx_count_compare, 'Comparison of nuclei counts by cell type in mouse cortex, this study vs. ding 2021.')
+
+mocx_count_cor = cor.test(mocx_count_compare$n_ding2020, mocx_count_compare$n_this_study, method='pearson')
+mocx_count_cor_rho = mocx_count_cor$estimate
+mocx_count_cor_p = mocx_count_cor$p.value
+
+write(paste('Correlation between cell counts by type in mouse cortex, this study vs. Ding 2020: rho = ',formatC(mocx_count_cor_rho, format='fg', digits=4),
+            ' P = ',formatC(mocx_count_cor_p, format='e', digits=2),'\n',sep=''),text_stats_path,append=T)
+
+
+
+
+
+
 # qPCR vs. SC measures of bulk target engagement
 
 qpcr_all = read_tsv('data/other/qpcr_all.tsv', col_types=cols())
@@ -229,23 +334,6 @@ acos %>%
 
 write_supp_table(acos_minimal, 'Negative binomial model coefficients simplified summary.')
 
-##############
-# TABLE 2
-##############
-
-cat(file=stderr(), 'done.\nCreating Table 2...')
-
-### summary table for Table 2
-meta %>%
-  inner_join(tx_meta, by='tx') %>%
-  inner_join(region_meta, by='reg') %>%
-  rename(treatment=disp) %>%
-  group_by(species, treatment, region, weeks) %>%
-  summarize(.groups='keep', n=n()) %>%
-  ungroup() %>%
-  arrange(desc(species), region, weeks, treatment) -> table_2
-
-write_tsv(table_2, 'display_items/table-2.tsv')
 
 zeroes = read_tsv('data/analytical/zeroes.tsv', col_types=cols())
 
@@ -1119,7 +1207,7 @@ abline(h=1, lty=3)
 axis(side=2, at=0:5/4, labels=NA, tck=-0.05)
 # axis(side=2, at=0:5/4, labels=percent(0:5/4), las=2, lwd=0, line=-0.75)
 points(x=rrs$umipc, y=rrs$normed, cex=log10(rrs$n_cells)-2, col=rrs$color, pch=19)
-mtext(side=1,  line=1.6, text=substitute(paste('UMIs / cell')), cex=0.7)
+mtext(side=1,  line=1.6, text=substitute(paste('UMIs / nucleus')), cex=0.7)
 mtext(LETTERS[panel], side=3, cex=1.5, adj = 0.0, line = 0.5)
 panel = panel + 1
 
@@ -1340,6 +1428,8 @@ make_wa = function(aggr, reg, tx, weeks) {
               umipc = sum(total_umis)/n())  %>%
     ungroup() -> subtype_stats
   
+  met = read_tsv(paste0('data/analytical/met_',aggr,'.tsv'), col_types=cols())
+  
   afi = read_tsv(paste0('data/analytical/afi_',aggr,'.tsv'), col_types=cols()) %>%
     filter(model %in% paste0(this_weeks,'-',this_tx))
   
@@ -1396,7 +1486,10 @@ make_wa = function(aggr, reg, tx, weeks) {
     filter(total_cells >= 100) %>%
     inner_join(rres, by=c('subtype')) %>%
     inner_join(delta_res, by=c('tx','subtype')) %>%
-    select(tx, color, subtype, total_cells, baseline_resid, baseline_rres, delta_resid, umipc, prnp_rpm_basal, rnaseh1_rpm) -> wa
+    rename(tx_color = color) %>%
+    inner_join(select(met, assignments, color), by=c('subtype'='assignments')) %>%
+    rename(subtype_color = color) %>%
+    select(tx, tx_color, subtype, subtype_color, total_cells, baseline_resid, baseline_rres, delta_resid, umipc, prnp_rpm_basal, rnaseh1_rpm) -> wa
   
   return(wa)
 }
@@ -1429,8 +1522,7 @@ axis(side=2, at=ylims, labels=NA, lwd.ticks=0)
 axis(side=2, line=0, tck=-0.02, at=0:10/10,labels=NA)
 axis(side=2, line=0, tck=-0.05, at=0:2/2,labels=NA)
 mtext(side=1, line=0.75, cex=0.5, text=substitute(paste('basal ',italic('Prnp'),' UPM')))
-points(wa$prnp_rpm_basal, wa$delta_resid, cex=(log10(wa$total_cells)-2.5), pch=19, col=wa$color)
-wa %>% distinct(tx, color) %>% mutate(disp = gsub('ASO','ASO ',toupper(tx))) -> leg
+points(wa$prnp_rpm_basal, wa$delta_resid, cex=(log10(wa$total_cells)-2.5), pch=21, lwd=1.25, col=wa$tx_color, bg=wa$subtype_color)
 mtext(LETTERS[panel], side=3, cex=1.5, adj = 0, line = 0.4)
 panel = panel + 1
 
@@ -1446,8 +1538,7 @@ mtext(side=1, line=0.75, cex=0.5, text=substitute(paste(italic('Rnaseh1'),' UPM'
 axis(side=2, at=ylims, labels=NA, lwd.ticks=0)
 axis(side=2, line=0, tck=-0.02, at=0:10/10,labels=NA)
 axis(side=2, line=0, tck=-0.05, at=0:2/2,labels=NA)
-points(wa$rnaseh1_rpm, wa$delta_resid, cex=(log10(wa$total_cells)-2.5), pch=19, col=wa$color)
-wa %>% distinct(tx, color) %>% mutate(disp = gsub('ASO','ASO ',toupper(tx))) -> leg
+points(wa$rnaseh1_rpm, wa$delta_resid, cex=(log10(wa$total_cells)-2.5), pch=21, lwd=1.25, col=wa$tx_color, bg=wa$subtype_color)
 mtext(LETTERS[panel], side=3, cex=1.5, adj = 0, line = 0.4)
 panel = panel + 1
 
@@ -1461,11 +1552,10 @@ mtext(side=1, line=0.75, cex=0.5, text=substitute(paste('2wk residual ',italic('
 axis(side=2, at=ylims, labels=NA, lwd.ticks=0)
 axis(side=2, line=0, tck=-0.02, at=0:10/10,labels=NA)
 axis(side=2, line=0, tck=-0.05, at=0:2/2,labels=NA)
-points(wa$baseline_resid, wa$delta_resid, cex=.5*(log10(wa$total_cells)-2), pch=19, col=wa$color)
+points(wa$baseline_resid, wa$delta_resid, cex=.5*(log10(wa$total_cells)-2), pch=21, lwd=1.25, col=wa$tx_color, bg=wa$subtype_color)
 abline(a=1,b=-1, lwd=0.5, lty=3)
-abline(lm(delta_resid ~ baseline_resid, weights=total_cells, data=subset(wa, tx=='aso1')), col=wa$color[wa$tx=='aso1'][1])
-abline(lm(delta_resid ~ baseline_resid, weights=total_cells, data=subset(wa, tx=='aso6')), col=wa$color[wa$tx=='aso6'][1])
-wa %>% distinct(tx, color) %>% mutate(disp = gsub('ASO','ASO ',toupper(tx))) -> leg
+abline(lm(delta_resid ~ baseline_resid, weights=total_cells, data=subset(wa, tx=='aso1')), col=wa$tx_color[wa$tx=='aso1'][1])
+abline(lm(delta_resid ~ baseline_resid, weights=total_cells, data=subset(wa, tx=='aso6')), col=wa$tx_color[wa$tx=='aso6'][1])
 mtext(LETTERS[panel], side=3, cex=1.5, adj = 0, line = 0.4)
 panel = panel + 1
 
@@ -1506,7 +1596,30 @@ unnecessary_message_end_of_figure_4 = dev.off()
 
 
 
+pk_meta = tibble(region = c("kidney cortex", "liver", 
+                            "lumbar spinal cord", "thoracic spinal cord", "cervical spinal cord",
+                            "frontal cortex", "temporal cortex", "hippocampus",  "cerebellum", "pons"), 
+                 y = 10:1)
+cyno_pk = read_tsv('data/other/cyno_pk.tsv', col_types=cols(dilution_factor = 'c', lloq_ug_g = 'c')) %>%
+  mutate(ason_ug_g = suppressWarnings(as.numeric(ason_ug_g))) %>%
+  mutate(region = tolower(region)) %>%
+  inner_join(pk_meta, by='region')
 
+write_supp_table(cyno_pk, 'Pharmacokinetic analysis of drug concentration in NHP tissue.')
+
+cyno_pk %>%
+  filter(!is.na(ason_ug_g)) %>%
+  mutate(lloq = suppressWarnings(as.numeric(lloq_ug_g))) %>%
+  group_by(y, region) %>%
+  summarize(.groups='keep',
+            n = n(),
+            mean = mean(ason_ug_g),
+            l95 = lower(ason_ug_g),
+            u95 = upper(ason_ug_g),
+            max_lloq = max(lloq, na.rm=T)) %>%
+  ungroup() -> cyno_pk_summary
+
+write_supp_table(cyno_pk_summary, 'Summarized pharmacokinetic analysis of drug concentration in NHP tissue.')
 
 ##############
 # FIGURE 5
@@ -2330,6 +2443,126 @@ unnecessary_message_end_of_figure_s1 = dev.off()
 
 
 #####
+# FIGURE S2
+#####
+
+cat(file=stderr(), 'done.\nCreating Figure S2...')
+
+resx=300
+png(paste0('display_items/figure-s2.png'),width=6.5*resx,height=2.5*resx,res=resx)
+
+layout_matrix = matrix(c(1,2,3), nrow=1, byrow=T)
+layout(layout_matrix)
+
+panel = 1
+
+par(mar=c(4,5,3,1))
+xlims = pmax(1,range(mocb_count_compare$n_this_study) * c(0.5,2))
+xats = rep(1:9,6)  * 10^rep(0:5,each=9)
+xbigs = 10^rep(0:5,each=9)
+yats = xats
+ybigs = xbigs
+ylims = pmax(1,range(mocb_count_compare$n_kozareva2021) * c(0.5, 2))
+plot(NA, NA, xlim=xlims, ylim=ylims, axes=F, ann=F, xaxs='i', yaxs='i', log='xy')
+axis(side=1, at=xats, tck=-0.025, labels=NA)
+axis(side=1, at=xbigs, labels=formatC(xbigs, format='d', big.mark=','), tck=-0.05)
+axis(side=2, at=yats, tck=-0.025, labels=NA)
+axis(side=2, at=ybigs, labels=formatC(ybigs, format='d', big.mark=','), tck=-0.05)
+points(x=mocb_count_compare$n_this_study, y=mocb_count_compare$n_kozareva2021, col=mocb_count_compare$color, pch=19, cex=1.2)
+mtext(side=1, line=2.5, text='N nuclei this study')
+mtext(side=2, line=2.5, text='N nuclei Kozareva 2021')
+mtext(side=3, line=0, text='cerebellum')
+mtext(LETTERS[panel], side=3, cex=1.5, adj = 0.0, line = 0.4)
+panel = panel + 1
+
+
+
+par(mar=c(4,5,3,1))
+xlims = pmax(1,range(mocx_count_compare$n_this_study) * c(0.5,2))
+xats = rep(1:9,6)  * 10^rep(0:5,each=9)
+xbigs = 10^rep(0:5,each=9)
+yats = xats
+ybigs = xbigs
+ylims = pmax(1,range(mocx_count_compare$n_ding2020) * c(0.5, 2))
+plot(NA, NA, xlim=xlims, ylim=ylims, axes=F, ann=F, xaxs='i', yaxs='i', log='xy')
+axis(side=1, at=xats, tck=-0.025, labels=NA)
+axis(side=1, at=xbigs, labels=formatC(xbigs, format='d', big.mark=','), tck=-0.05)
+axis(side=2, at=yats, tck=-0.025, labels=NA)
+axis(side=2, at=ybigs, labels=formatC(ybigs, format='d', big.mark=','), tck=-0.05)
+points(x=mocx_count_compare$n_this_study, y=mocx_count_compare$n_ding2020, col=mocx_count_compare$color, pch=19, cex=1.2)
+mtext(side=1, line=2.5, text='N nuclei this study')
+mtext(side=2, line=2.5, text='N nuclei Ding 2020')
+mtext(side=3, line=0, text='cortex')
+mtext(LETTERS[panel], side=3, cex=1.5, adj = 0.0, line = 0.4)
+panel = panel + 1
+
+
+par(mar=c(4,5,3,1))
+xlims = pmax(1,range(moth_count_compare$n_this_study) * c(0.5,2))
+xats = rep(1:9,6)  * 10^rep(0:5,each=9)
+xbigs = 10^rep(0:5,each=9)
+yats = xats
+ybigs = xbigs
+ylims = pmax(1,range(moth_count_compare$n_li2020) * c(0.5, 2))
+plot(NA, NA, xlim=xlims, ylim=ylims, axes=F, ann=F, xaxs='i', yaxs='i', log='xy')
+axis(side=1, at=xats, tck=-0.025, labels=NA)
+axis(side=1, at=xbigs, labels=formatC(xbigs, format='d', big.mark=','), tck=-0.05)
+axis(side=2, at=yats, tck=-0.025, labels=NA)
+axis(side=2, at=ybigs, labels=formatC(ybigs, format='d', big.mark=','), tck=-0.05)
+points(x=moth_count_compare$n_this_study, y=moth_count_compare$n_li2020, col=moth_count_compare$color, pch=19, cex=1.2)
+mtext(side=1, line=2.5, text='N nuclei this study')
+mtext(side=2, line=2.5, text='N nuclei Li 2020')
+mtext(side=3, line=0, text='thalamus')
+mtext(LETTERS[panel], side=3, cex=1.5, adj = 0.0, line = 0.4)
+panel = panel + 1
+
+
+unnecessary_message_end_of_figure_s2 = dev.off()
+
+
+
+
+
+
+#####
+# FIGURE S3
+#####
+
+cat(file=stderr(), 'done.\nCreating Figure S3...')
+
+resx=300
+png(paste0('display_items/figure-s3.png'),width=6.5*resx,height=3*resx,res=resx)
+par(mfrow=c(1,1))
+panel = 1
+par(mar=c(3,8,2,1))
+xlims = c(0.3,500)
+xats = rep(1:9,4)  * 10^rep(-1:2,each=9)
+xbigs = 10^rep(-1:2,each=9)
+ylims = c(0.5, 10.5)
+plot(NA, NA, xlim=xlims, ylim=ylims, axes=F, ann=F, xaxs='i', yaxs='i', log='x')
+axis(side=1, at=xats, tck=-0.025, labels=NA)
+axis(side=1, at=xbigs, labels=NA, tck=-0.05)
+axis(side=1, at=xbigs, labels=formatC(xbigs, format='d', big.mark=','), lwd=0, line=-0.5)
+mtext(side=1, line=1.5, text='ASO N concentration (µg/g)')
+axis(side=2, at=ylims, labels=NA, lwd.ticks=0)
+mtext(side=2, at=pk_meta$y, text=pk_meta$region, line=0.25, las=2)
+lloq_barwidth = 0.45
+lloq_col = '#A90000'
+segments(x0=cyno_pk_summary$max_lloq, y0=cyno_pk_summary$y - lloq_barwidth, y1=cyno_pk_summary$y + lloq_barwidth, lty=3, lwd=1, col=lloq_col)
+mtext(side=3, at=4, line=0.25, text='LLOQ', col=lloq_col)
+points(x=cyno_pk$ason_ug_g, y=cyno_pk$y, pch=19, col=alpha(tx_meta$color[tx_meta$tx=='aso7'], ci_alpha))
+ci_barwidth = 0.3
+segments(x0 = cyno_pk_summary$mean, y0 = cyno_pk_summary$y - ci_barwidth, y1 = cyno_pk_summary$y + ci_barwidth, col = tx_meta$color[tx_meta$tx=='aso7'], lwd=1.5)
+arrows(x0 = cyno_pk_summary$l95, x1 = cyno_pk_summary$u95, y0 = cyno_pk_summary$y, col = tx_meta$color[tx_meta$tx=='aso7'], code=3, angle=90, length=0.05, lwd=1.5)
+#mtext(LETTERS[panel], side=3, cex=1.5, adj = 0.0, line = 0.4)
+panel = panel + 1
+
+unnecessary_message_end_of_figure_s3 = dev.off()
+
+
+
+
+#####
 # SUPPLEMENT
 #####
 
@@ -2449,9 +2682,6 @@ for (this_aggr in unique(scp_metadata$aggr)) {
 
 elapsed_time = Sys.time() - overall_start_time
 cat(file=stderr(), paste0('done.\nAll tasks complete in ',round(as.numeric(elapsed_time),1),' ',units(elapsed_time),'.\n'))
-
-
-
 
 
 

@@ -1,4 +1,4 @@
-Last updated: 2023-02-19
+Last updated: 2023-04-11
 
 QC metrics | mean number of reads: 532,089,568
 
@@ -9,6 +9,14 @@ QC metrics | mean reads per cell: 85,521
 QC metrics | mean of median UMI count per cell: 7,650
 
 QC metrics | mean of median genes per cell: 3,108
+
+Correlation between cell counts by type in mouse cerebellum, this study vs. Kozareva 2021: rho = 0.9994 P = 5.23e-19
+
+Correlation between cell counts by type in mouse thalamus, this study vs. Li 2020: rho =   0.2 P = 6.06e-01
+
+Correlation between cell counts by type in mouse thalamus, this study vs. Li 2020, excluding inhibitory: rho = 0.6326 P = 9.23e-02
+
+Correlation between cell counts by type in mouse cortex, this study vs. Ding 2020: rho = 0.9828 P = 2.15e-06
 
 Proportion of all UMIs that are Malat1 in all mouse samples: 11.4%
 

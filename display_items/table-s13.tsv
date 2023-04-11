@@ -1,25 +1,56 @@
-animal	sex	treatment	tissue	prp_ngml	prp_relative
-m1	M	aCSF	cerebellum	101.146	0.6327339378376096
-m1	M	aCSF	cortex	200.022	0.9231333700238488
-m2	M	aCSF	cerebellum	156.086	0.9764193287062378
-m2	M	aCSF	cortex	203.145	0.9375465121511373
-m3	M	ASO N	cerebellum	123.508	0.7726227749436209
-m3	M	ASO N	cortex	112.339	0.5184623674151301
-m4	M	ASO N	cerebellum	135.447	0.8473089759188768
-m4	M	ASO N	cortex	48.562	0.22412136022586587
-f1	F	aCSF	cerebellum	201.219	1.2587555636183927
-f1	F	aCSF	cortex	222.659	1.0276067284405723
-f2	F	aCSF	cerebellum	180.971	1.1320911698377598
-f2	F	aCSF	cortex	240.883	1.1117133893844415
-f3	F	ASO N	cerebellum	152.725	0.9553940902877911
-f3	F	ASO N	cortex	111.288	0.5136118351142078
-f4	F	ASO N	cerebellum	113.238	0.7083772532068023
-f4	F	ASO N	cortex	83.14	0.3837043344421253
-m1	M	aCSF	CSF	3	0.7700699480202785
-m2	M	aCSF	CSF	5.116	1.3132259513572482
-m3	M	ASO N	CSF	3.498	0.8979015593916447
-m4	M	ASO N	CSF	0.853	0.2189565552204325
-f1	F	aCSF	CSF	3.973	1.019829301161522
-f2	F	aCSF	CSF	3.494	0.89687479946095106
-f3	F	ASO N	CSF	1.658	0.42559199127254055
-f4	F	ASO N	CSF	3.309	0.8493871526663672
+model	umis	count	density
+PBS actual	0	208	0.259351620947631
+PBS actual	1	245	0.305486284289277
+PBS actual	2	162	0.201995012468828
+PBS actual	3	96	0.119700748129676
+PBS actual	4	43	0.0536159600997506
+PBS actual	5	25	0.0311720698254364
+PBS actual	6	11	0.013715710723192
+PBS actual	7	6	0.00748129675810474
+PBS actual	8	3	0.00374064837905237
+PBS actual	9	0	0
+PBS actual	10	3	4.15627597672485e-05
+ASO 6 actual	0	448	0.454822335025381
+ASO 6 actual	1	309	0.313705583756345
+ASO 6 actual	2	131	0.132994923857868
+ASO 6 actual	3	63	0.0639593908629442
+ASO 6 actual	4	23	0.0233502538071066
+ASO 6 actual	5	7	0.00710659898477157
+ASO 6 actual	6	2	0.00203045685279188
+ASO 6 actual	7	1	0.00101522842639594
+ASO 6 actual	8	1	0.00101522842639594
+ASO 6 actual	9	0	0
+ASO 6 actual	10	0	0
+NB fit for PBS	0	27442	0.27442
+NB fit for PBS	1	28117	0.28117
+NB fit for PBS	2	20134	0.20134
+NB fit for PBS	3	11765	0.11765
+NB fit for PBS	4	6346	0.06346
+NB fit for PBS	5	3268	0.03268
+NB fit for PBS	6	1523	0.01523
+NB fit for PBS	7	755	0.00755
+NB fit for PBS	8	345	0.00345
+NB fit for PBS	9	161	0.00161
+NB fit for PBS	10	144	1.6e-05
+Hypothesis 1: 100% knockdown in subset of cells	0	58417	0.58417
+Hypothesis 1: 100% knockdown in subset of cells	1	17224	0.17224
+Hypothesis 1: 100% knockdown in subset of cells	2	11415	0.11415
+Hypothesis 1: 100% knockdown in subset of cells	3	6571	0.06571
+Hypothesis 1: 100% knockdown in subset of cells	4	2973	0.02973
+Hypothesis 1: 100% knockdown in subset of cells	5	1757	0.01757
+Hypothesis 1: 100% knockdown in subset of cells	6	783	0.00783
+Hypothesis 1: 100% knockdown in subset of cells	7	419	0.00419
+Hypothesis 1: 100% knockdown in subset of cells	8	225	0.00225
+Hypothesis 1: 100% knockdown in subset of cells	9	0	0
+Hypothesis 1: 100% knockdown in subset of cells	10	216	2.4e-05
+Hypothesis 2: equal knockdown in all cells	0	44861	0.44861
+Hypothesis 2: equal knockdown in all cells	1	31319	0.31319
+Hypothesis 2: equal knockdown in all cells	2	14613	0.14613
+Hypothesis 2: equal knockdown in all cells	3	6015	0.06015
+Hypothesis 2: equal knockdown in all cells	4	2177	0.02177
+Hypothesis 2: equal knockdown in all cells	5	672	0.00672
+Hypothesis 2: equal knockdown in all cells	6	248	0.00248
+Hypothesis 2: equal knockdown in all cells	7	64	0.00064
+Hypothesis 2: equal knockdown in all cells	8	22	0.00022
+Hypothesis 2: equal knockdown in all cells	9	7	7e-05
+Hypothesis 2: equal knockdown in all cells	10	2	2.22222222222222e-07
