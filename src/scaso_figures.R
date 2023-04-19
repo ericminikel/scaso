@@ -1594,7 +1594,7 @@ unnecessary_message_end_of_figure_4 = dev.off()
 
 
 
-
+read_tsv('data/meta/cynos.tsv', col_types=cols()) -> cy_meta
 
 pk_meta = tibble(region = c("kidney cortex", "liver", 
                             "lumbar spinal cord", "thoracic spinal cord", "cervical spinal cord",
@@ -1603,7 +1603,9 @@ pk_meta = tibble(region = c("kidney cortex", "liver",
 cyno_pk = read_tsv('data/other/cyno_pk.tsv', col_types=cols(dilution_factor = 'c', lloq_ug_g = 'c')) %>%
   mutate(ason_ug_g = suppressWarnings(as.numeric(ason_ug_g))) %>%
   mutate(region = tolower(region)) %>%
-  inner_join(pk_meta, by='region')
+  inner_join(pk_meta, by='region') %>%
+  inner_join(cy_meta, by='animal') %>%
+  select(animal_id_short, sex, region, y, ason_ug_g, dilution_factor, lloq_ug_g)
 
 write_supp_table(cyno_pk, 'Pharmacokinetic analysis of drug concentration in NHP tissue.')
 
