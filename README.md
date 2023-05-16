@@ -1,6 +1,6 @@
 This repository holds the data and source code for the following manuscript:
 
-Mortberg MA, Gentile JE, Nadaf N, Vanderburg C, Simmons S, Dubinsky D, Slamin A, Maldonado S, Petersen CL, Jones N, Kordasiewicz HB, Zhao HT, Vallabh SM, Minikel EV. **A single-cell map of antisense oligonucleotide activity in the brain.** _bioRxiv_. 2023 Feb 14;2023.02.14.528473. [doi: 2023.02.14.528473](https://doi.org/10.1101/2023.02.14.528473)
+Mortberg MA & Gentile JE (equal contribution), Nadaf NM, Vanderburg C, Simmons S, Dubinsky D, Slamin A, Maldonado S, Petersen CL, Jones N, Kordasiewicz HB, Zhao HT, Vallabh SM, Minikel EV. **A single-cell map of antisense oligonucleotide activity in the brain.** _Nucleic Acids Res._ 2023 May 16:gkad371. [doi: 10.1093/nar/gkad371](https://doi.org/10.1093/nar/gkad371). [PMID: 37188501](https://pubmed.ncbi.nlm.nih.gov/37188501/). [PDF](/manuscript/mortberg-gentile-2023-a-single-cell-map-with-supplement.pdf).
 
 #### What's here
 
